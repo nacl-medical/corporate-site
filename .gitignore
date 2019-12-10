@@ -1,1 +1,11 @@
 .DS_Store
+.vscode
+
+node_modules
+
+public/**
+
+src/css/**
+src/lib/**
+
+!.gitkeep
