@@ -1,0 +1,328 @@
+//////////////////////////////////////////////////////
+// mixin
+//////////////////////////////////////////////////////
+
+$breakpoints: (
+  "md": "screen and (max-width: 600px)",
+  "lg": "screen and (max-width: 1000px)",
+  "xl": "screen and (min-width: 1400px)",
+  "xxl": "screen and (min-width: 1800px)"
+) !default;
+
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+//////////////////////////////////////////////////////
+// color
+//////////////////////////////////////////////////////
+$color-brand: #0a35a0;
+$color-black: #000;
+$color-gray1: #222;
+$color-gray2: #888;
+
+//////////////////////////////////////////////////////
+// margin
+//////////////////////////////////////////////////////
+$space-l7: 120px;
+$space-l6: 80px;
+$space-l5: 56px;
+$space-l4: 48px;
+$space-l3: 40px;
+$space-l2: 32px;
+$space-l1: 24px;
+$space-m: 16px;
+$space-s1: 8px;
+$space-s2: 4px;
+
+//////////////////////////////////////////////////////
+// Utility
+//////////////////////////////////////////////////////
+.u-sp-only {
+  display: none;
+
+  @include mq {
+    display: block;
+  }
+}
+
+.u-tab-only {
+  display: none;
+
+  @include mq(lg) {
+    display: block;
+  }
+
+  @include mq {
+    display: none;
+  }
+}
+
+.u-pc-only {
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+//////////////////////////////////////////////////////
+// Base
+//////////////////////////////////////////////////////
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: $color-brand;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+body {
+  color: $color-gray1;
+  font-family: "Public Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", "Hiragino Sans", sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  letter-spacing: 0.01rem;
+  line-break: strict;
+  line-height: 1.75;
+  text-align: justify;
+}
+
+//////////////////////////////////////////////////////
+// Layout
+//////////////////////////////////////////////////////
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 0 3%;
+  width: 100%;
+
+  @include mq() {
+    max-width: none;
+    min-width: auto;
+    padding: 0 $space-l1;
+  }
+
+  &__header {
+    padding: $space-l5 0;
+
+    @include mq {
+      padding: $space-l2 0;
+    }
+  }
+
+  &__footer {
+    padding: $space-l2 0;
+  }
+}
+
+.contents-area {
+  padding: 0 0 $space-l7 0;
+
+  @include mq {
+    padding: 0 0 $space-l6 0;
+  }
+}
+
+.header-logo {
+  &__image {
+    margin-left: 2px;
+    min-width: 180px;
+    width: 20%;
+
+    @include mq(xxl) {
+      width: 300px;
+    }
+  }
+}
+
+.contents-title {
+  color: $color-brand;
+  font-size: $space-l2;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  padding-bottom: $space-l2;
+
+  @include mq {
+    padding-bottom: $space-l1;
+  }
+}
+
+.main-lead {
+  &__title {
+    color: $color-black;
+    font-size: $space-l3;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.4;
+    padding: $space-l1 0 $space-l4 0;
+
+    @include mq {
+      font-size: 10vw;
+      padding-bottom: $space-l5;
+    }
+
+    @include mq(xl) {
+      font-size: 2.8vw;
+    }
+
+    @include mq(xxl) {
+      font-size: 50px;
+    }
+  }
+
+  &__text {
+    font-size: $space-l1;
+    font-weight: 700;
+    letter-spacing: 0.02rem;
+
+    @include mq {
+      font-size: 20px;
+    }
+
+    @include mq(xl) {
+      font-size: 1.6vw;
+    }
+
+    @include mq(xxl) {
+      font-size: 28.6px;
+    }
+  }
+}
+
+.caption {
+  color: $color-gray2;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+.table-column {
+  display: table;
+  padding: 0 0 $space-l1 0;
+  width: 66%;
+
+  @include mq(lg) {
+    display: block;
+    width: 100%;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &__th {
+    display: table-cell;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    width: 180px;
+
+    @include mq {
+      display: block;
+      padding-bottom: $space-s2;
+      width: 100%;
+    }
+  }
+
+  &__td {
+    display: table-cell;
+
+    @include mq {
+      display: block;
+    }
+  }
+
+  &--border {
+    border-bottom: 1px solid #eee;
+    padding: $space-l1 0 $space-l1 0;
+
+    @include mq {
+      padding: $space-m 0 $space-m 0;
+    }
+
+    &:first-child {
+      border-top: 1px solid #eee;
+    }
+
+    &:last-child {
+      padding-bottom: $space-l1;
+
+      @include mq {
+        padding-bottom: $space-m;
+      }
+    }
+  }
+}
+
+.hr-list {
+  overflow: hidden;
+
+  @include mq {
+    display: block;
+  }
+
+  &__item {
+    float: left;
+    margin-right: 2%;
+    width: calc(96% / 3);
+
+    @include mq(lg) {
+      float: none;
+      padding: 0 0 $space-l2 0;
+      width: 100%;
+    }
+
+    &:last-child {
+      margin-right: 0;
+      @include mq {
+        padding: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  &__item-title {
+    color: $color-brand;
+    font-size: $space-l1;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    padding-bottom: $space-s1;
+  }
+
+  &__item-text {
+    font-size: $space-m;
+  }
+
+  &__item-image {
+    padding-bottom: $space-m;
+
+    img {
+      @include mq(lg) {
+        max-height: 300px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      @include mq {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.footer {
+  font-size: 12px;
+}
